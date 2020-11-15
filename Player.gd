@@ -19,7 +19,6 @@ func _physics_process(delta):
 		direction += transform.basis.x
 	direction = direction.normalized()
 	
-	if direction != Vector3():
-		if is_network_master():
-			move_and_slide(direction * speed, Vector3.UP)
+	if is_network_master():
+		move_and_slide(direction * speed, Vector3.UP)
 		rpc_unreliable("_set_position", global_transform.origin)
